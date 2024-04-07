@@ -1,0 +1,43 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+---
+
+<Layout title={`rate-it - ${session?.user?.name}`}>
+  <div class="max-w-6xl mx-auto px-5 mt-32">
+    {
+      !session ? (
+        <div class="flex items-center justify-center h-[70vh]">
+          <p>Oops, You must be signed in to view your profile.</p>
+        </div>
+      ) : (
+        <div class="flex gap-10">
+          <img class="rounded-full" src={session?.user?.image} />
+          <div class="flex flex-col gap-2 py-3">
+            <h4>{session?.user?.name}</h4>
+            <button
+              class="py-1 px-3 rounded bg-neutral-600 hover:bg-neutral-700 duration-150"
+              id="logout"
+            >
+              Sign out
+            </button>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</Layout>
+
+<script>
+  import { $ } from "../../lib/dom-selector";
+  const { signOut } = await import("auth-astro/client");
+
+  const $logout = $("#logout");
+
+  $logout.onclick = () =>
+    signOut({
+      callbackUrl: "/",
+    });
+</script>

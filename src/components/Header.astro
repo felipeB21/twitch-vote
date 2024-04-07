@@ -1,0 +1,62 @@
+---
+const LINKS = [
+  { name: "New", url: "/new" },
+  { name: "Top", url: "/top" },
+  { name: "About", url: "/about" },
+] as const;
+
+import { getSession } from "auth-astro/server";
+import Twitch from "./icons/Twitch.astro";
+
+const session = await getSession(Astro.request);
+---
+
+<header class="bg-neutral-800 border-b border-neutral-700 fixed top-0 w-full">
+  <div class="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-12">
+      <div>
+        <a class="text-xl font-medium" href="/">vote-it</a>
+      </div>
+      <nav>
+        <ul class="flex items-center gap-8">
+          {
+            LINKS.map((link) => (
+              <li>
+                <a class="animated-links" href={link.url}>
+                  {link.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+    <div>
+      {
+        session ? (
+          <a href="/profile">
+            <img class="w-10 rounded-full" src={session.user?.image} />
+          </a>
+        ) : (
+          <div class="py-1">
+            <button
+              class="flex items-center gap-3 py-1 px-3 rounded bg-purple-500 hover:bg-purple-600 duration-150"
+              id="login"
+            >
+              Sign in
+              <Twitch />
+            </button>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</header>
+
+<script>
+  const { signIn } = await import("auth-astro/client");
+  import { $ } from "../lib/dom-selector";
+
+  const $login = $("#login");
+  $login.onclick = () => signIn("twitch");
+</script>
