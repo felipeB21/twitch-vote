@@ -1,0 +1,16 @@
+---
+import GoBack from "./GoBack.astro";
+import GetGames from "./api/GetGames.astro";
+export const title = "Top Games";
+---
+
+<div class="flex flex-col justify-between">
+  <GoBack />
+  <div>
+    <h4 class="text-3xl">{title}</h4>
+    <p class="text-neutral-400">Vote one of this games</p>
+  </div>
+  <div class="mt-10">
+    <GetGames />
+  </div>
+</div>

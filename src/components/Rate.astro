@@ -1,5 +1,10 @@
 ---
-
+const SECTIONS = [
+  { name: "Twitch Streamers", url: "/rate/twitch-streamers" },
+  { name: "Youtube Channels", url: "/rate/youtube-channels" },
+  { name: "Top Games", url: "/rate/top-games" },
+  { name: "Football Players", url: "/rate/football-players" },
+];
 ---
 
 <div class="flex items-center justify-center h-[35vh]">
@@ -11,10 +16,17 @@
       </p>
     </div>
     <div>
-      <a
-        class="bg-neutral-700 py-3 px-6 rounded border border-neutral-600 hover:bg-neutral-800 duration-200"
-        href="/rate">Start voting</a
-      >
+      <ul class="grid grid-cols-3 items-center gap-5">
+        {
+          SECTIONS.map((section) => (
+            <li>
+              <a class="animated-links" href={section.url}>
+                {section.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </div>

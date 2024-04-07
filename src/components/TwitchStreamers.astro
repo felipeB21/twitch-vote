@@ -1,0 +1,42 @@
+---
+import { STREAMERS } from "../consts/twitch-streamers";
+import GoBack from "./GoBack.astro";
+
+export const title = "Twitch Streamers";
+---
+
+<div class="flex flex-col justify-between">
+  <GoBack />
+  <div>
+    <h4 class="text-3xl">{title}</h4>
+    <p class="text-neutral-400">Vote one of this streamers</p>
+  </div>
+  <div class="mt-10">
+    <ul class="flex items-center gap-10">
+      {
+        STREAMERS.map((streamer) => (
+          <li class="grid grid-cols-1 gap-5">
+            <div class="flex flex-col items-center gap-1">
+              <p class="text-sm">{streamer.name}</p>
+              <button>
+                <img class="streamer-image" src={streamer.image} />
+              </button>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="mt-10">
+    <button>Next</button>
+  </div>
+</div>
+
+<style>
+  .streamer-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+</style>
