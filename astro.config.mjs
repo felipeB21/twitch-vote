@@ -11,7 +11,10 @@ export default defineConfig({
   output: "server",
   adapter: vercel({
     webAnalytics: {
-      enabled: true
-    }
-  })
+      enabled: true,
+    },
+  }),
+  images: {
+    domains: ["static-cdn.jtvnw.net"],
+  },
 });

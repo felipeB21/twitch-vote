@@ -7,7 +7,7 @@ import { getSession } from "auth-astro/server";
 const session = await getSession(Astro.request);
 ---
 
-<Layout title="vote-it">
+<Layout title="twitch-vote">
   <main class="max-w-6xl mx-auto px-5 mt-32">
     {!session ? <Intro /> : <Rate />}
   </main>
