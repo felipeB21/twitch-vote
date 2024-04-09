@@ -1,4 +1,5 @@
 ---
+import Footer from "../components/Footer.astro";
 import Intro from "../components/Intro.astro";
 import Rate from "../components/Rate.astro";
 import Layout from "../layouts/Layout.astro";
@@ -10,5 +11,8 @@ const session = await getSession(Astro.request);
 <Layout title="twitch-vote">
   <main class="max-w-6xl mx-auto px-5 mt-32">
     {!session ? <Intro /> : <Rate />}
+    <div class="absolute bottom-0 left-0 right-0 flex justify-center py-8">
+      <Footer />
+    </div>
   </main>
 </Layout>

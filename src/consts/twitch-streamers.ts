@@ -15,20 +15,26 @@ export const STREAMERS: Streamers[] = [
   },
   {
     id: "kai-cenat",
-    name: "Kai Cenat",
+    name: "KaiCenat",
     image:
       "https://static-cdn.jtvnw.net/jtv_user_pictures/1d8cd548-04fa-49fb-bfcd-f222f73482b6-profile_image-300x300.png",
   },
   {
     id: "ibai",
-    name: "Ibai",
+    name: "ibai",
     image:
       "https://static-cdn.jtvnw.net/jtv_user_pictures/574228be-01ef-4eab-bc0e-a4f6b68bedba-profile_image-300x300.png",
   },
   {
     id: "caseoh_",
-    name: "CASEOH_",
+    name: "caseoh_",
     image:
       "https://static-cdn.jtvnw.net/jtv_user_pictures/ef28ba12-c8ed-46d4-838b-a4c95ef5b469-profile_image-300x300.png",
+  },
+  {
+    id: "pgl",
+    name: "PGL",
+    image:
+      "https://static-cdn.jtvnw.net/jtv_user_pictures/c7496e0d-a668-421a-9567-f7ec89e68d64-profile_image-300x300.png",
   },
 ] as const;
