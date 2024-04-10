@@ -1,7 +1,7 @@
 ---
 import GoBack from "./GoBack.astro";
-import GetGames from "./api/GetGames.astro";
 export const title = "Top Games";
+import { getGames } from "../lib/games";
 ---
 
 <div class="flex flex-col justify-between">
@@ -11,6 +11,51 @@ export const title = "Top Games";
     <p class="text-neutral-400">Vote one of this games</p>
   </div>
   <div class="mt-10">
-    <GetGames />
+    <ul
+      class="grid gap-10 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2"
+    >
+      {
+        await getGames().then((games) =>
+          games.map((game) => (
+            <li>
+              <div class="flex flex-col items-center gap-2">
+                <p class="text-[10.5px]">{game.name.slice(0, 20)}</p>
+                <button data-game-id={game.id} class="vote-game">
+                  <img
+                    src={game.box_art_url.replace(
+                      "{width}x{height}",
+                      "120x160"
+                    )}
+                    alt={game.name.slice(0, 20)}
+                  />
+                </button>
+              </div>
+            </li>
+          ))
+        )
+      }
+    </ul>
   </div>
 </div>
+
+<script>
+  import { $$, $ } from "../lib/dom-selector";
+
+  const $voteGame = $$(".vote-game") as NodeListOf<HTMLButtonElement>;
+
+  $voteGame.forEach(($game) => {
+    const { gameId } = $game.dataset;
+
+    $game.onclick = async () => {
+      const res = await fetch(`/api/votes/${gameId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ gameId }),
+      });
+
+      console.log(res.ok, res.status, res.statusText);
+    };
+  });
+</script>

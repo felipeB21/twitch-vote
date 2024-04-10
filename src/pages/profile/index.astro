@@ -18,7 +18,7 @@ const session = await getSession(Astro.request);
             <div class="flex flex-col items-center gap-4">
               <img class="rounded-full" src={session?.user?.image} />
               <div class="flex flex-col items-center gap-8">
-                <h4>{session?.user?.name}</h4>
+                <h4 class="font-bold">{session?.user?.name}</h4>
                 <button
                   class="py-1 px-3 rounded bg-neutral-600 hover:bg-neutral-700 duration-150"
                   id="logout"

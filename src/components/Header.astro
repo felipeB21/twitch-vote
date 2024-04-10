@@ -57,5 +57,5 @@ const session = await getSession(Astro.request);
   import { $ } from "../lib/dom-selector";
 
   const $login = $("#login");
-  $login.onclick = () => signIn("twitch");
+  if ($login) $login.onclick = () => signIn("twitch");
 </script>
